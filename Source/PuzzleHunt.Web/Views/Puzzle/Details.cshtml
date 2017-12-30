@@ -1,0 +1,77 @@
+﻿@using PuzzleHunt.Web
+@using PuzzleHunt.Web.Models
+@model PuzzleDetailsModel
+
+@{
+    ViewBag.Title = Html.Title(@Model.Puzzle.Name);
+}
+
+<h2>@Model.Puzzle.Name</h2>
+
+<div>
+@Html.Raw(Model.Puzzle.Content)
+</div>
+
+@if (Model.Status == PuzzleStatus.Started)
+{
+    <div>
+        @using (Html.BeginForm(new { id = Model.Puzzle.Id }))
+        {
+            @Html.ValidationSummary()
+            <fieldset>
+                <legend>Answer</legend>
+
+                @Html.TextBox("answer")
+        
+                <p>
+                    <input type="submit" value="Guess" />
+                </p>
+            </fieldset>
+    
+        }
+    </div>
+}
+
+@if ((Model.Status == PuzzleStatus.Started ||
+      Model.Status == PuzzleStatus.HuntFinished ||
+      Model.Status == PuzzleStatus.Completed ||
+      Model.Status == PuzzleStatus.UserIsAdmin))
+{
+    if (Model.Status == PuzzleStatus.Started && Model.Hints.Count < 3)
+    {
+        using (Html.BeginForm("Hint", "Puzzle", new { id = Model.Puzzle.Id }))
+        {
+            <p>
+                <input type="submit" value="Request hint" />
+            </p>
+        }
+    }
+    
+    <div>
+        @foreach (var hint in Model.Hints)
+        {
+            <h4>Hint #@hint.Order</h4>
+            <p>@Html.Raw(hint.Content)</p>
+        }
+    </div>
+    
+        if (Model.Completions != null && Model.Completions.Count > 0)
+        {
+        <h3>Completions</h3>
+    
+        <table class="hor-minimalist-b">
+        <thead>
+            <tr><th>Team</th><th>Hints Taken</th><th>Time Since Last Activity</th></tr>
+        </thead>
+
+        @foreach (var completion in Model.Completions)
+        {
+            TimeSpan time = completion.TimeSinceLastActivity;
+            <tr><td>@completion.TeamName</td><td>@completion.HintsTaken</td><td>@Html.DisplayTimespan(time)</td></tr>
+        }
+
+    </table>
+    }
+}
+
+

@@ -1,0 +1,11 @@
+﻿@using PuzzleHunt.Web
+@using PuzzleHunt.Web.Models
+@model PuzzleWithSolution
+
+@{
+    ViewBag.Title = Html.Title(@Model.Name + " solution");
+}
+
+<h2>@Model.Name</h2>
+
+@Html.Raw(@Model.Solution)

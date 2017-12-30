@@ -1,0 +1,25 @@
+﻿@using PuzzleHunt.Web
+@using PuzzleHunt.Web.Models
+@model TeamSummary
+
+@{
+    ViewBag.Title = Html.Title("Join Team");
+}
+
+<h2>Join</h2>
+
+<div>
+@using (Html.BeginForm(new {id = Model.Id})) {
+    @Html.ValidationSummary()
+    <fieldset>
+        <legend>Password</legend>
+
+        @Html.Password("password")
+        
+        <p>
+            <input type="submit" value="Join" />
+        </p>
+    </fieldset>
+    
+}
+</div>

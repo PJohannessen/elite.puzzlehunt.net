@@ -1,0 +1,21 @@
+﻿@using PuzzleHunt.Web
+@using PuzzleHunt.Web.Models
+@model IList<Guess>
+@{
+    ViewBag.Title = @Html.Title("Administration");
+}
+
+<h2>Admin</h2>
+
+<h3>Guesses</h3>
+<table class="hor-minimalist-b">
+    <thead>
+        <tr><th>Id</th><th>Time</th><th>User</th><th>Puzzle</th><th>Answer</th></tr>
+    </thead>
+
+    @foreach (var guess in Model)
+    {
+        <tr><td>@guess.Id</td><td>@guess.Time</td><td>@guess.UserName</td><td>@guess.PuzzleName</td><td>@guess.Answer</td></tr>
+    }
+
+</table>

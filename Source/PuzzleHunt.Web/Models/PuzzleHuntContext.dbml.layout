@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14, 9.25" name="PuzzleHuntModel">
+  <DataContextMoniker Name="/PuzzleHuntContext" />
+  <nestedChildShapes>
+    <classShape Id="d8d1363b-72f8-4fa5-b9f8-38591d62833e" absoluteBounds="9, 7.375, 2, 1.5785953776041657">
+      <DataClassMoniker Name="/PuzzleHuntContext/Hint" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1238e89e-1f70-4873-adb6-5858c752237f" absoluteBounds="9.015, 7.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ed70d728-76de-41d2-b386-80257f550c91" absoluteBounds="0.75, 4.375, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/PuzzleHuntContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="74bcfdcb-6603-40cd-b952-dc9b98db4711" absoluteBounds="0.765, 4.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="84d1bbb2-49d3-43f4-9de4-a64f53d512d5" absoluteBounds="3.5, 4.125, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/PuzzleHuntContext/Hunt" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ff05a8fa-2ec3-4aae-a33e-4f283c89e9fc" absoluteBounds="3.515, 4.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="19e082af-316b-4221-9d43-1fe6d6ae382b" absoluteBounds="6.25, 0.75, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/PuzzleHuntContext/Puzzle" />
+      <nestedChildShapes>
+        <elementListCompartment Id="043b72c7-b0ee-4ea7-b030-b75e35973350" absoluteBounds="6.265, 1.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="974f566e-d8d3-481d-bc4d-781be4045c5b" absoluteBounds="11.75, 5.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/PuzzleHuntContext/TeamHintRequest" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4fad7d6e-59b1-490e-97a5-1b056584aecc" absoluteBounds="11.765, 6.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1b292153-70af-4b96-8505-37d6e587b053" absoluteBounds="9, 4.375, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/PuzzleHuntContext/TeamMembership" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b1127db0-a889-443c-88f5-6607b54125c4" absoluteBounds="9.015, 4.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="846bfb0e-d2ef-4dc3-a557-b0f65acbb781" absoluteBounds="9, 1.375, 2, 1.7708968098958335">
+      <DataClassMoniker Name="/PuzzleHuntContext/TeamPuzzleResult" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f1caf050-51b6-4e5a-b072-8a93b2d05db3" absoluteBounds="9.015, 1.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="050e1273-7cde-40de-a88f-355ac24980cb" absoluteBounds="6.25, 4.25, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/PuzzleHuntContext/Team" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6b3e0a8b-643b-4aa3-b9d4-3e62f2b4d1d5" absoluteBounds="6.265, 4.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 5.06814697265625); (3.5 : 5.06814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PuzzleHuntContext/User/User_Hunt" />
+      <nodes>
+        <classShapeMoniker Id="ed70d728-76de-41d2-b386-80257f550c91" />
+        <classShapeMoniker Id="84d1bbb2-49d3-43f4-9de4-a64f53d512d5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 3.28856307752404); (8.625 : 3.66356307752404); (8.625 : 8.16429768880208); (9 : 8.16429768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PuzzleHuntContext/Puzzle/Puzzle_Hint" />
+      <nodes>
+        <classShapeMoniker Id="19e082af-316b-4221-9d43-1fe6d6ae382b" />
+        <classShapeMoniker Id="d8d1363b-72f8-4fa5-b9f8-38591d62833e" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.59375 : 4.125); (4.59375 : 2.81174967447917); (6.25 : 2.81174967447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PuzzleHuntContext/Hunt/Hunt_Puzzle" />
+      <nodes>
+        <classShapeMoniker Id="84d1bbb2-49d3-43f4-9de4-a64f53d512d5" />
+        <classShapeMoniker Id="19e082af-316b-4221-9d43-1fe6d6ae382b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.15625 : 4.375); (1.15625 : 3.08217860677083); (1.80729266666667 : 3.08217860677083 : JumpStart); (1.97395933333333 : 3.08217860677083 : JumpEnd); (4.51041666666667 : 3.08217860677083 : JumpStart); (4.67708333333333 : 3.08217860677083 : JumpEnd); (6.25 : 3.08217860677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PuzzleHuntContext/User/User_Puzzle" />
+      <nodes>
+        <classShapeMoniker Id="ed70d728-76de-41d2-b386-80257f550c91" />
+        <classShapeMoniker Id="19e082af-316b-4221-9d43-1fe6d6ae382b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11 : 8.16429768880208); (12.75 : 8.16429768880208); (12.75 : 7.32859537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PuzzleHuntContext/Hint/Hint_TeamHintRequest" />
+      <nodes>
+        <classShapeMoniker Id="d8d1363b-72f8-4fa5-b9f8-38591d62833e" />
+        <classShapeMoniker Id="974f566e-d8d3-481d-bc4d-781be4045c5b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.281252 : 4.375); (2.281252 : 3.875); (4.51041666666667 : 3.875 : JumpStart); (4.67708333333333 : 3.875 : JumpEnd); (8.5 : 3.875); (8.5 : 4.97199625651042); (8.54166666666667 : 4.97199625651042 : JumpStart); (8.70833333333333 : 4.97199625651042 : JumpEnd); (9 : 4.97199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PuzzleHuntContext/User/User_TeamMembership" />
+      <nodes>
+        <classShapeMoniker Id="ed70d728-76de-41d2-b386-80257f550c91" />
+        <classShapeMoniker Id="1b292153-70af-4b96-8505-37d6e587b053" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 2.26044840494792); (9 : 2.26044840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PuzzleHuntContext/Puzzle/Puzzle_TeamPuzzleResult" />
+      <nodes>
+        <classShapeMoniker Id="19e082af-316b-4221-9d43-1fe6d6ae382b" />
+        <classShapeMoniker Id="846bfb0e-d2ef-4dc3-a557-b0f65acbb781" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4.28125); (8.41666666666667 : 4.28125 : JumpStart); (8.70833333333333 : 4.28125 : JumpEnd); (12.75 : 4.28125); (12.75 : 5.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PuzzleHuntContext/Team/Team_TeamHintRequest" />
+      <nodes>
+        <classShapeMoniker Id="050e1273-7cde-40de-a88f-355ac24980cb" />
+        <classShapeMoniker Id="974f566e-d8d3-481d-bc4d-781be4045c5b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4.61099812825521); (8.41666666666667 : 4.61099812825521 : JumpStart); (8.70833333333333 : 4.61099812825521 : JumpEnd); (9 : 4.61099812825521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PuzzleHuntContext/Team/Team_TeamMembership" />
+      <nodes>
+        <classShapeMoniker Id="050e1273-7cde-40de-a88f-355ac24980cb" />
+        <classShapeMoniker Id="1b292153-70af-4b96-8505-37d6e587b053" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4.31192851096755); (8.44107443490112 : 4.12085407606643 : JumpStart); (8.55892556509888 : 4.00300294586867 : JumpEnd); (8.56607443490112 : 3.99585407606643 : JumpStart); (8.68392556509888 : 3.87800294586867 : JumpEnd); (8.6875 : 3.87442851096755); (8.6875 : 2.73442460742188); (9 : 2.73442460742188)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PuzzleHuntContext/Team/Team_TeamPuzzleResult" />
+      <nodes>
+        <classShapeMoniker Id="050e1273-7cde-40de-a88f-355ac24980cb" />
+        <classShapeMoniker Id="846bfb0e-d2ef-4dc3-a557-b0f65acbb781" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 5.03929768880208); (6.25 : 5.03929768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PuzzleHuntContext/Hunt/Hunt_Team" />
+      <nodes>
+        <classShapeMoniker Id="84d1bbb2-49d3-43f4-9de4-a64f53d512d5" />
+        <classShapeMoniker Id="050e1273-7cde-40de-a88f-355ac24980cb" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="eb5d1f2f-6cd8-4ab3-a2e7-3543e041ea9b" absoluteBounds="1.625, 0.5, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/PuzzleHuntContext/TeamGuess" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0ee736b1-bacd-42ea-9162-4ed6c055b3af" absoluteBounds="1.6399999999999997, 0.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.25 : 1.51044840494792); (3.625 : 1.51044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PuzzleHuntContext/Puzzle/Puzzle_TeamGuess" />
+      <nodes>
+        <classShapeMoniker Id="19e082af-316b-4221-9d43-1fe6d6ae382b" />
+        <classShapeMoniker Id="eb5d1f2f-6cd8-4ab3-a2e7-3543e041ea9b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.890626 : 4.375); (1.890626 : 2.27089680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PuzzleHuntContext/User/User_TeamGuess" />
+      <nodes>
+        <classShapeMoniker Id="ed70d728-76de-41d2-b386-80257f550c91" />
+        <classShapeMoniker Id="eb5d1f2f-6cd8-4ab3-a2e7-3543e041ea9b" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

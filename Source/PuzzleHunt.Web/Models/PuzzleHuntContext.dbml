@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PuzzleHunt" Class="PuzzleHuntContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=PuzzleHunt;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PuzzleHuntConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Hints" Member="Hints">
+    <Type Name="Hint">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PuzzleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Order]" Member="Order" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="Hint_TeamHintRequest" Member="TeamHintRequests" ThisKey="Id" OtherKey="HintId" Type="TeamHintRequest" />
+      <Association Name="Puzzle_Hint" Member="Puzzle" ThisKey="PuzzleId" OtherKey="Id" Type="Puzzle" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Hunt" Member="Hunts" ThisKey="Id" OtherKey="CreatorId" Type="Hunt" />
+      <Association Name="User_Puzzle" Member="Puzzles" ThisKey="Id" OtherKey="CreatorId" Type="Puzzle" />
+      <Association Name="User_TeamMembership" Member="TeamMemberships" ThisKey="Id" OtherKey="UserId" Type="TeamMembership" />
+      <Association Name="User_TeamGuess" Member="TeamGuesses" ThisKey="Id" OtherKey="UserId" Type="TeamGuess" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Hunts" Member="Hunts">
+    <Type Name="Hunt">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CreatorId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="StartTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Hunt_Puzzle" Member="Puzzles" ThisKey="Id" OtherKey="HuntId" Type="Puzzle" />
+      <Association Name="Hunt_Team" Member="Teams" ThisKey="Id" OtherKey="HuntId" Type="Team" />
+      <Association Name="User_Hunt" Member="User" ThisKey="CreatorId" OtherKey="Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Puzzles" Member="Puzzles">
+    <Type Name="Puzzle">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HuntId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatorId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Order]" Member="Order" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Difficulty" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="Answer" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Solution" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Puzzle_Hint" Member="Hints" ThisKey="Id" OtherKey="PuzzleId" Type="Hint" />
+      <Association Name="Puzzle_TeamPuzzleResult" Member="TeamPuzzleResults" ThisKey="Id" OtherKey="PuzzleId" Type="TeamPuzzleResult" />
+      <Association Name="Puzzle_TeamGuess" Member="TeamGuesses" ThisKey="Id" OtherKey="PuzzleId" Type="TeamGuess" />
+      <Association Name="Hunt_Puzzle" Member="Hunt" ThisKey="HuntId" OtherKey="Id" Type="Hunt" IsForeignKey="true" />
+      <Association Name="User_Puzzle" Member="User" ThisKey="CreatorId" OtherKey="Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TeamHintRequests" Member="TeamHintRequests">
+    <Type Name="TeamHintRequest">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TeamId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HintId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RequestTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Hint_TeamHintRequest" Member="Hint" ThisKey="HintId" OtherKey="Id" Type="Hint" IsForeignKey="true" />
+      <Association Name="Team_TeamHintRequest" Member="Team" ThisKey="Id" OtherKey="Id" Type="Team" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TeamMemberships" Member="TeamMemberships">
+    <Type Name="TeamMembership">
+      <Column Name="TeamId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="User_TeamMembership" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" />
+      <Association Name="Team_TeamMembership" Member="Team" ThisKey="TeamId" OtherKey="Id" Type="Team" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TeamPuzzleResults" Member="TeamPuzzleResults">
+    <Type Name="TeamPuzzleResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TeamId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PuzzleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Puzzle_TeamPuzzleResult" Member="Puzzle" ThisKey="PuzzleId" OtherKey="Id" Type="Puzzle" IsForeignKey="true" />
+      <Association Name="Team_TeamPuzzleResult" Member="Team" ThisKey="TeamId" OtherKey="Id" Type="Team" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Teams" Member="Teams">
+    <Type Name="Team">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HuntId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Association Name="Team_TeamHintRequest" Member="TeamHintRequest" ThisKey="Id" OtherKey="Id" Type="TeamHintRequest" Cardinality="One" />
+      <Association Name="Team_TeamMembership" Member="TeamMemberships" ThisKey="Id" OtherKey="TeamId" Type="TeamMembership" />
+      <Association Name="Team_TeamPuzzleResult" Member="TeamPuzzleResults" ThisKey="Id" OtherKey="TeamId" Type="TeamPuzzleResult" />
+      <Association Name="Hunt_Team" Member="Hunt" ThisKey="HuntId" OtherKey="Id" Type="Hunt" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TeamGuesses" Member="TeamGuesses">
+    <Type Name="TeamGuess">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PuzzleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Guess" Type="System.String" DbType="NVarChar(64) NOT NULL" CanBeNull="false" />
+      <Association Name="Puzzle_TeamGuess" Member="Puzzle" ThisKey="PuzzleId" OtherKey="Id" Type="Puzzle" IsForeignKey="true" />
+      <Association Name="User_TeamGuess" Member="User" ThisKey="UserId" OtherKey="Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

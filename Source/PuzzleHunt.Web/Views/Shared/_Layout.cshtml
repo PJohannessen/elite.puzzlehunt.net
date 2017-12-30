@@ -1,0 +1,51 @@
+﻿@using PuzzleHunt.Web.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link type="text/css" rel="Stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.12/themes/redmond/jquery-ui.css" /> 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    @MvcMiniProfiler.MiniProfiler.RenderIncludes()
+</head>
+
+<body>
+    <div id="container">
+        <div id="banner">
+            <h1>The Elite Puzzle Hunt 2011</h1>
+        </div>
+        
+        <div id="leftnav">
+            <ul>
+                <li>- @Html.ActionLink("Home", "Index", "Home")</li>
+                <li>- @Html.ActionLink("Rules", "Rules", "Home")</li>
+                <li>- @Html.ActionLink("FAQ", "FAQ", "Home")</li>
+                <li>- @Html.ActionLink("Contacts", "Contacts", "Home")</li>
+                <li>- @Html.ActionLink("Puzzles", "Index", "Puzzle")</li>
+            </ul>
+            <hr /> 
+            @{
+                AuthenticatedUser currentUser = null;
+                if (ViewBag.CurrentUser != null)
+                {
+                    currentUser = (AuthenticatedUser) ViewBag.CurrentUser;
+                }
+                @Html.Partial("LogOnControl", currentUser, new ViewDataDictionary())
+            }
+        </div>
+
+        <div id="content">
+            @if (TempData.Peek("message") != null)
+            {
+                <div id="message">@TempData["message"]</div>
+            }
+            @RenderBody()
+        </div>
+
+        <div id="footer">
+            <a href="http://www.the-elite.net">The Elite</a> - 2011
+        </div>
+    </div>
+</body>
+</html>

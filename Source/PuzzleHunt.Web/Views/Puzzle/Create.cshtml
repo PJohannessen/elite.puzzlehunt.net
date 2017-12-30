@@ -1,0 +1,73 @@
+﻿@using PuzzleHunt.Web
+@model PuzzleHunt.Web.Models.CreatePuzzleModel
+
+@{
+    ViewBag.Title = Html.Title("Create Puzzle");
+}
+
+<h2>Create Puzzle</h2>
+
+<p>
+    Use the form below to create a new puzzle.
+</p>
+
+@using (Html.BeginForm("Create", "Puzzle", new {id = Model.HuntId})) {
+    @Html.ValidationSummary(true, "Puzzle creation was unsuccessful. Please correct the errors and try again.")
+    <div>
+        <fieldset>
+            <legend>Puzzle Information</legend>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Name)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Order)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Order)
+                @Html.ValidationMessageFor(m => m.Order)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Difficulty)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Difficulty)
+                @Html.ValidationMessageFor(m => m.Difficulty)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Content)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(m => m.Content)
+                @Html.ValidationMessageFor(m => m.Content)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Answer)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Answer)
+                @Html.ValidationMessageFor(m => m.Answer)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Solution)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(m => m.Solution)
+                @Html.ValidationMessageFor(m => m.Solution)
+            </div>
+
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    </div>
+}

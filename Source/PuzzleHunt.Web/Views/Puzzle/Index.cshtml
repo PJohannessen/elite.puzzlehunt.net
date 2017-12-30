@@ -1,0 +1,192 @@
+﻿@using PuzzleHunt.Web
+@using PuzzleHunt.Web.Models
+@model HuntModel
+
+@{
+    ViewBag.Title = @Html.Title("Puzzles");
+}
+
+@if (Model.UserHuntStatus == UserHuntStatus.UserIsAdmin)
+{
+    <p>@Html.ActionLink("Admin", "Admin", "Puzzle")</p>
+}
+
+<h3>Puzzles</h3>
+
+@if (Model.EndTime > DateTime.UtcNow && Model.UserHuntStatus == UserHuntStatus.UserIsAdmin)
+{
+    <p>@Html.ActionLink("Create a new puzzle.", "Create", "Puzzle", new { id = 1 }, null)</p>
+}
+
+@if (Model.Puzzles == null || Model.Puzzles.Count() == 0)
+{
+    <p>There are currently no puzzles in this hunt.</p>
+}
+else if (Model.UserHuntStatus != UserHuntStatus.UserIsAdmin && Model.StartTime > DateTime.UtcNow)
+{
+    <p>The puzzles will become available once the hunt has begun.</p>
+}
+else if (Model.EndTime < DateTime.UtcNow)
+{
+       <div>
+        <table class="hor-minimalist-b">
+        <thead>
+            <tr><th>Name</th><th>Author</th><th>Difficulty</th><th>Solution</th></tr>
+        </thead>
+        
+        @foreach (var puzzle in Model.Puzzles)
+        {
+            <tr><td>
+                @Html.ActionLink(puzzle.Name, "Details", "Puzzle", new { id = puzzle.Id }, null)
+            </td><td>@puzzle.Creator.Username</td><td>@puzzle.Difficulty</td>
+            <td>@Html.ActionLink("Solution", "Solution", "Puzzle", new { id = puzzle.Id }, null)</td>
+            </tr>
+        }
+        </table>
+    </div>
+}
+else
+{
+    <div>
+        <table class="hor-minimalist-b">
+        <thead>
+            <tr><th>Name</th><th>Author</th><th>Difficulty</th><th>Start Time</th><th>Time Since Last Activity</th></tr>
+        </thead>
+        
+        @foreach (var puzzle in Model.Puzzles)
+        {
+            <tr><td>
+            @if (Model.UserHuntStatus == UserHuntStatus.UserInTeam || Model.UserHuntStatus == UserHuntStatus.UserIsAdmin)
+            {
+                if (Model.UserHuntStatus == UserHuntStatus.UserInTeam && !puzzle.StartTime.HasValue)
+                {
+                    @Html.ActionLink(puzzle.Name, "Details", "Puzzle", new { id = puzzle.Id }, new { @class = "confirmation" })
+                }
+                else
+                {
+                    @Html.ActionLink(puzzle.Name, "Details", "Puzzle", new { id = puzzle.Id }, null)
+                }
+            }
+            else
+            {
+                @puzzle.Name
+            }
+            </td><td>@puzzle.Creator.Username</td><td>@puzzle.Difficulty</td>
+            @if (Model.UserHuntStatus != UserHuntStatus.UserIsAdmin)
+            {
+                <td>
+                @if (puzzle.StartTime.HasValue)
+                {
+                    @puzzle.StartTime.Value.ToString("yyyy/MM/dd HH:mm")
+                }
+                else
+                {
+                    <text>N/A</text>
+                }
+                </td>
+                <td>
+                @if (puzzle.StartTime.HasValue)
+                {
+                    if ((puzzle.Hints == null || !puzzle.Hints.Any()) && !puzzle.CompletionTime.HasValue)
+                    {
+                        TimeSpan timeSinceRequest = DateTime.UtcNow - puzzle.StartTime.Value;
+                        @string.Format("{0}:{1}:{2} (0 hints given)", timeSinceRequest.Days, timeSinceRequest.Hours, timeSinceRequest.Minutes)
+                    }
+                    else if ((puzzle.Hints == null || !puzzle.Hints.Any()) && puzzle.CompletionTime.HasValue)
+                    {
+                        TimeSpan timeSinceRequest = puzzle.CompletionTime.Value - puzzle.StartTime.Value;
+                        @string.Format("{0}:{1}:{2} (completed with 0 hints)", timeSinceRequest.Days, timeSinceRequest.Hours, timeSinceRequest.Minutes)
+                    }
+                    else if (!puzzle.CompletionTime.HasValue)
+                    {
+                        TimeSpan timeSinceRequest = DateTime.UtcNow - puzzle.Hints.Last().RequestTime;
+                        @string.Format("{0}:{1}:{2} ({3} hint(s) given)", timeSinceRequest.Days, timeSinceRequest.Hours, timeSinceRequest.Minutes, puzzle.Hints.Count)
+                    }
+                    else
+                    {
+                        TimeSpan timeSinceRequest = puzzle.CompletionTime.Value - puzzle.Hints.Last().RequestTime;
+                        @string.Format("{0}:{1}:{2} (completed with {3} hint(s))", timeSinceRequest.Days, timeSinceRequest.Hours, timeSinceRequest.Minutes, puzzle.Hints.Count)
+                    }
+                }
+                else
+                {   
+                    <text>N/A</text>
+                }
+                </td>
+            }
+            else
+            {
+                <td>@Html.ActionLink("Edit", "Edit", "Puzzle", new { id = puzzle.Id }, null)</td>
+            }
+            </tr>
+        }
+        </table>
+    </div>
+}
+
+<h3>Teams</h3>
+
+@if (Model.UserHuntStatus == UserHuntStatus.UserNotInTeam)
+{
+    <p>
+    @Html.ActionLink("Create a team.", "Create", "Team")
+    </p>
+}
+
+@if (Model.Teams == null || Model.Teams.Count() == 0)
+{
+    <p>There are currently no teams in this hunt.</p>
+}
+else
+{
+    <div>
+        <table class="hor-minimalist-b">
+            <thead>                <tr><th>Name</th><th>Players</th><th></th></tr>            </thead>
+            @foreach (var team in Model.Teams)
+            {
+                <tr><td>@team.Name</td><td>
+                @foreach (var player in team.Players)
+                {
+                    <text>@player.Username</text><br />
+                }</td><td>
+                @if (@team.Players.Count() < 2 && Model.UserHuntStatus == UserHuntStatus.UserNotInTeam)
+                {
+                    @Html.ActionLink("Join", "Join", "Team", new { id = team.Id }, null);
+                }
+            </td></tr>
+            }
+        </table>
+    </div>
+}
+
+<div id="dialog-confirm" title="Start the puzzle?" style="visibility: hidden;">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+    By viewing this puzzle the timer will begin. Your goal is to solve this puzzle faster than the other teams. Are you sure you want to begin?</p>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        function custom_confirm(prompt, action, title) {
+            var obj = document.getElementById('dialog-confirm');
+            obj.style.visibility = 'visible';
+            $("#dialog-confirm").dialog({
+                buttons: {
+                    'Start the puzzle!': function () {
+                        $(this).dialog('close');
+                        action();
+                    },
+                    'Not yet!': function () {
+                        $(this).dialog('close');
+                    }
+                }
+            });
+        }
+
+        $("a.confirmation").click(function (e) {
+            e.preventDefault();
+            var href = this.href;
+            custom_confirm('Are you sure you want to start the puzzle?', function () { location.href = href; })
+        });
+    });
+
+</script>

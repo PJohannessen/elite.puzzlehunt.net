@@ -1,0 +1,11 @@
+﻿@model PuzzleHunt.Web.Models.AuthenticatedUser
+
+@if (Model != null)
+{
+    <p>Welcome back @Model.Username. @Html.ActionLink("Log Off", "LogOff", "Account")</p>
+}
+else
+{
+    <li>- @Html.ActionLink("Log In", "Login", "Account")</li>
+    <li>- @Html.ActionLink("Register", "Register", "Account")</li>
+}
